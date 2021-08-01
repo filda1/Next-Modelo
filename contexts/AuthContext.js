@@ -43,6 +43,7 @@ export function AuthProvider({ children }) {
 
     setUser(user)
 
+    //Adentro
     //Router.push('/dashboard');
   }
 
