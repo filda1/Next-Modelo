@@ -25,6 +25,7 @@ export function AuthProvider({ children }) {
       })
     }
   }, [])*/
+  
 
   //---------- Primero, entra los datos de Login por aqui  ----------//
   async function signIn({ email, password }) {
