@@ -5,7 +5,7 @@ import { setCookie, parseCookies } from 'nookies'
 import { api } from "../services/api";
 import { URL_API } from "../services/url_api";
 
-export function signInRequest(data) {
+export async function signInRequest(data) {
 
     const client = {   
         "identifier": data.email,
@@ -22,9 +22,16 @@ export function signInRequest(data) {
       })
       .then(res => {
                //console.log('RES >>',res) 
-              setCookie(undefined, 'nextauth.token', res.data.jwt, {
+              setCookie(undefined, 'next.token', res.data.jwt, {
                 maxAge: 60 * 60 * 1, // 1 hour
               })
+              setCookie(undefined, 'next.user_id', res.data.user.id, {
+                maxAge: 60 * 60 * 1, // 1 hour
+               })
+              setCookie(undefined, 'next.user_email', rest.data.user.email, {
+               maxAge: 60 * 60 * 1, // 1 hour
+              })
+
               const data = res.data
 
               return data
@@ -35,7 +42,7 @@ export function signInRequest(data) {
         });
 
        return {
-         user: data.user,  
+         user: data,  
         //token: '',
                     
        }

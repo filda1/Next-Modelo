@@ -11,12 +11,13 @@ export const AuthContext = createContext({})
 export function AuthProvider({ children }) {
   const [user, setUser] = useState([])
 
-  const isAuthenticated = !!user;
+  //const isAuthenticated = !!user;
+  const isAuthenticated = false;
 
-  const { 'nextauth.token': token } = parseCookies()
+  const { 'next.token': token } = parseCookies()
 
-    //------------ En caso, que se  haga Refresh pagina actuliza los datos del user -------//
-/*  useEffect(() => {
+  //------------ En caso, que se  haga Refresh pagina actualiza los datos del user -------//
+/*useEffect(() => {
     const { 'nextauth.token': token } = parseCookies()
 
     if (token) {
@@ -38,19 +39,21 @@ export function AuthProvider({ children }) {
       maxAge: 60 * 60 * 1, // 1 hour
     })*/
 
-  
+     
     api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     setUser(user)
 
+    // console.log(user)
     //Adentro
-    //Router.push('/dashboard');
+    Router.push('/second');
   }
 
   return (
     //------ Como Ultimo se le paso los datos a los componentes que estan envueltos con Auth Global -----//
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn  }}>
       {children}
     </AuthContext.Provider>
   )
 }
+
