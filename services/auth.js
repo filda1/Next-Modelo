@@ -3,7 +3,7 @@ import axios from "axios";
 import { setCookie, parseCookies } from 'nookies'
 
 import { api } from "../services/api";
-import { URL_API } from "../services/url_api";
+import { URL_API, TOKEN } from "../services/url_api";
 
 export async function signInRequest(data) {
 
@@ -12,8 +12,9 @@ export async function signInRequest(data) {
         "password": data.password
       };
   
-
-      axios.post(URL_API + '/auth/local', client, {
+   //console.log(api)
+      axios.post( URL_API + '/auth/local', client, {
+     // axios.post(`${api}/auth/local`, client, {
         headers:{
             //'authorization': your_token,
             'Accept' : 'application/json',
@@ -28,9 +29,9 @@ export async function signInRequest(data) {
               setCookie(undefined, 'next.user_id', res.data.user.id, {
                 maxAge: 60 * 60 * 1, // 1 hour
                })
-              setCookie(undefined, 'next.user_email', rest.data.user.email, {
+              /*setCookie(undefined, 'next.user_email', rest.data.user.email, {
                maxAge: 60 * 60 * 1, // 1 hour
-              })
+              })*/
 
               const data = res.data
 
@@ -53,3 +54,4 @@ export async function signInRequest(data) {
      
     }
 }*/
+

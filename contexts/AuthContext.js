@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from "react";
-import { setCookie, parseCookies } from 'nookies'
+import { setCookie, parseCookies, destroyCookie } from 'nookies'
 import Router from 'next/router'
 
 import { recoverUserInformation, signInRequest } from "../services/auth";
 import { api } from "../services/api";
 
 
-export const AuthContext = createContext({})
+export const AuthContext = createContext({ })
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState([])
@@ -27,6 +27,16 @@ export function AuthProvider({ children }) {
     }
   }, [])*/
 
+  async function signOut() {
+  
+    destroyCookie( null, 'next.token')
+    destroyCookie( null, 'next.user_id')
+    setUser(null)
+
+    Router.push('/')
+  }
+
+
   //---------- Primero, entra los datos de Login por aqui  ----------//
   async function signIn({ email, password }) {
     //const { token, user } = await signInRequest({
@@ -34,24 +44,25 @@ export function AuthProvider({ children }) {
       email,
       password,
     })
-
+  
    /* setCookie(undefined, 'nextauth.token', token, {
       maxAge: 60 * 60 * 1, // 1 hour
     })*/
 
      
-    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    //api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     setUser(user)
 
     // console.log(user)
     //Adentro
     Router.push('/second');
+
   }
 
   return (
     //------ Como Ultimo se le paso los datos a los componentes que estan envueltos con Auth Global -----//
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn  }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )
