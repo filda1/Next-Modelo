@@ -14,7 +14,7 @@ export default function second() {
 
     return (
         <div>
-          { user.email}, { current_user.name}
+          { user.email}
         </div>
         
     )
@@ -25,8 +25,7 @@ export const getServerSideProps = async (ctx) => {
     const { ['next.token']: token } = parseCookies(ctx)
 
   //console.log(ctx.req.token)
-
-    //const token ="gfggsgsggsdfdsu34ujjfjd"
+  //const token ="gfggsgsggsdfdsu34ujjfjd"
 
     if (!token) {
       return {

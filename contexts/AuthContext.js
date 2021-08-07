@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
+
 import Router from 'next/router'
 
 import { recoverUserInformation, signInRequest } from "../services/auth";
@@ -31,6 +32,7 @@ export function AuthProvider({ children }) {
   
     destroyCookie( null, 'next.token')
     destroyCookie( null, 'next.user_id')
+    destroyCookie( null, 'next.email')
     setUser(null)
 
     Router.push('/')
