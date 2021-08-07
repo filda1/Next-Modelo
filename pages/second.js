@@ -14,7 +14,7 @@ export default function second() {
 
     return (
         <div>
-          { user.email}
+          { user.email},  { current_user.email}
         </div>
         
     )
