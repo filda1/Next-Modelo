@@ -2,14 +2,21 @@ import { Fragment, useContext, useEffect } from 'react'
 import { parseCookies } from 'nookies'
 
 import { AuthContext } from '../contexts/AuthContext'
+import { useStateValue } from "../contexts/StateProvider";
 import { getAPIClient } from '../services/axios'
 
 export default function second() {
+    //Conecto AuthContext y Recibo
     const { user } = useContext(AuthContext)
+
+    //Conecto ContextAPI y Recibo
+    const [{ basket, current_user }, dispatch] = useStateValue();
+
     return (
         <div>
-          { user.email}
+          { user.email}, { current_user.name}
         </div>
+        
     )
 }
 

@@ -5,7 +5,7 @@ import Router from 'next/router'
 import { recoverUserInformation, signInRequest } from "../services/auth";
 import { api } from "../services/api";
 
-
+//--------------------------  AUTHCONTEXT -----------------------------//
 export const AuthContext = createContext({ })
 
 export function AuthProvider({ children }) {
